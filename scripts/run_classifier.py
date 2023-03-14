@@ -51,14 +51,22 @@ except ImportError:
 
 
 logger = logging.getLogger(__name__)
-# from transformers import ALBERT_PRETRAINED_CONFIG_ARCHIVE_MAP
-ALL_MODELS = sum(
-	(
-		tuple(conf.pretrained_config_archive_map.keys())
-		for conf in (BertConfig, RobertaConfig)
-	),
-	(),
-)
+
+# ALL_MODELS = sum(
+# 	(
+# 		tuple(conf.pretrained_config_archive_map.keys())
+# 		for conf in (BertConfig, RobertaConfig)
+# 	),
+# 	(),
+# )
+
+# MODEL_CLASSES = {
+# 	"bert": (BertConfig, BertForSequenceClassification, BertTokenizer),
+# 	"roberta": (RobertaConfig, RobertaForSequenceClassification, RobertaTokenizer),
+# }
+from transformers import BERT_PRETRAINED_CONFIG_ARCHIVE_MAP
+
+ALL_MODELS=tuple(BERT_PRETRAINED_CONFIG_ARCHIVE_MAP)
 
 MODEL_CLASSES = {
 	"bert": (BertConfig, BertForSequenceClassification, BertTokenizer),
@@ -402,14 +410,14 @@ def main():
 	)
 	parser.add_argument(
 		"--model_type",
-		default=None,
+		default='bert',
 		type=str,
 		required=True,
 		help="Model type selected in the list: " + ", ".join(MODEL_CLASSES.keys()),
 	)
 	parser.add_argument(
 		"--model_name_or_path",
-		default=None,
+		default='models/bert_regard_v2_large/checkpoint-300',
 		type=str,
 		required=True,
 		help="Path to pre-trained model or shortcut name selected in the list: " + ", ".join(ALL_MODELS),
