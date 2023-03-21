@@ -9,7 +9,7 @@ class bot(nn.Module):
         """
         self.bot = GPT3_api or Blenderbot or DialogGPT
         """
-        openai.api_key = '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'
+        openai.ap'
 
     def make_response(self, prefix_sentences):
         
